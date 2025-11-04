@@ -2,6 +2,42 @@
 alias aptup='sudo apt update && sudo apt -y upgrade'
 alias aptgetup='sudo apt-get update && sudo apt-get -y upgrade'
 
+# System update & upgrade - auto-detects package manager
+alias sysup='\
+if command -v apt >/dev/null 2>&1; then \
+    sudo apt update && sudo apt -y upgrade; \
+elif command -v dnf >/dev/null 2>&1; then \
+    sudo dnf -y update; \
+elif command -v yum >/dev/null 2>&1; then \
+    sudo yum -y update; \
+elif command -v pacman >/dev/null 2>&1; then \
+    sudo pacman -Syu; \
+elif command -v zypper >/dev/null 2>&1; then \
+    sudo zypper update; \
+elif command -v apk >/dev/null 2>&1; then \
+    sudo apk update && sudo apk upgrade; \
+else \
+    echo "No supported package manager found"; \
+fi'
+# Clean up package cache
+alias pkgclean='\
+if [ -x "$(command -v apt)" ]; then sudo apt autoremove && sudo apt autoclean; \
+elif [ -x "$(command -v dnf)" ]; then sudo dnf autoremove; \
+elif [ -x "$(command -v pacman)" ]; then sudo pacman -Sc; \
+fi'
+# Search for packages
+alias pkgsearch='\
+if [ -x "$(command -v apt)" ]; then apt search; \
+elif [ -x "$(command -v dnf)" ]; then dnf search; \
+elif [ -x "$(command -v pacman)" ]; then pacman -Ss; \
+fi'
+# Install packages
+alias pkginst='\
+if [ -x "$(command -v apt)" ]; then sudo apt install; \
+elif [ -x "$(command -v dnf)" ]; then sudo dnf install; \
+elif [ -x "$(command -v pacman)" ]; then sudo pacman -S; \
+fi'
+
 # Navigation
 alias ..='cd ..'
 alias ...='cd ../..'

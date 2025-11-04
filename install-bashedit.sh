@@ -1,12 +1,15 @@
 #!/bin/bash
 
 # install-bashedit.sh - Install bashedit configurations to .bashrc
+# Created by Younes Modaresian (github.com/younesmod)
 
 BASHRC_FILE="$HOME/.bashrc"
 BACKUP_FILE="$HOME/.bashrc.backup.$(date +%Y%m%d_%H%M%S)"
 BASHEDIT_FILE="bashedit"
 
 echo "=== Installing bashedit configurations to .bashrc ==="
+echo "👤 Created by: Younes Modaresian (github.com/younesmod)"
+echo ""
 
 # Check if bashedit file exists
 if [ ! -f "$BASHEDIT_FILE" ]; then
@@ -37,6 +40,7 @@ echo "📝 Appending configurations from $BASHEDIT_FILE..."
 
 echo "" >> "$BASHRC_FILE"
 echo "# ===== bashedit additions - $(date) =====" >> "$BASHRC_FILE"
+echo "# Created by Younes Modaresian (github.com/younesmod)" >> "$BASHRC_FILE"
 cat "$BASHEDIT_FILE" >> "$BASHRC_FILE"
 echo "# ===== END bashedit additions =====" >> "$BASHRC_FILE"
 
@@ -50,6 +54,7 @@ fi
 # Display summary
 echo ""
 echo "=== Installation Complete ==="
+echo "👤 Author: Younes Modaresian (github.com/younesmod)"
 echo "📁 Backup: $BACKUP_FILE"
 echo "📄 Modified: $BASHRC_FILE"
 echo "🔧 Source: $BASHEDIT_FILE"
