@@ -1,0 +1,139 @@
+# System update & upgrade
+alias aptup='sudo apt update && sudo apt -y upgrade'
+alias aptgetup='sudo apt-get update && sudo apt-get -y upgrade'
+
+# System update & upgrade - auto-detects package manager
+alias sysup='\
+if command -v apt >/dev/null 2>&1; then \
+    sudo apt update && sudo apt -y upgrade; \
+elif command -v dnf >/dev/null 2>&1; then \
+    sudo dnf -y update; \
+elif command -v yum >/dev/null 2>&1; then \
+    sudo yum -y update; \
+elif command -v pacman >/dev/null 2>&1; then \
+    sudo pacman -Syu; \
+elif command -v zypper >/dev/null 2>&1; then \
+    sudo zypper update; \
+elif command -v apk >/dev/null 2>&1; then \
+    sudo apk update && sudo apk upgrade; \
+else \
+    echo "No supported package manager found"; \
+fi'
+# Clean up package cache
+alias pkgclean='\
+if [ -x "$(command -v apt)" ]; then sudo apt autoremove && sudo apt autoclean; \
+elif [ -x "$(command -v dnf)" ]; then sudo dnf autoremove; \
+elif [ -x "$(command -v pacman)" ]; then sudo pacman -Sc; \
+fi'
+# Search for packages
+alias pkgsearch='\
+if [ -x "$(command -v apt)" ]; then apt search; \
+elif [ -x "$(command -v dnf)" ]; then dnf search; \
+elif [ -x "$(command -v pacman)" ]; then pacman -Ss; \
+fi'
+# Install packages
+alias pkginst='\
+if [ -x "$(command -v apt)" ]; then sudo apt install; \
+elif [ -x "$(command -v dnf)" ]; then sudo dnf install; \
+elif [ -x "$(command -v pacman)" ]; then sudo pacman -S; \
+fi'
+
+# Navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+#alias ~='cd ~' # Better to not use this command
+#alias desktop='cd ~/Desktop'
+
+# Listing files
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias ls='ls --color=auto'
+# -a: all, -A: almost-all, -F: classify, -C: list entries by columns, -h: human-readable
+
+# Safety nets
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+# -i: prompt before every removal
+
+# Quick edits
+alias editzsh='nano ~/.zshrc'
+alias reloadzsh='source ~/.zshrc'
+
+# Git shortcuts
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline'
+
+# System monitoring
+alias cpu='top -o cpu'
+alias mem='top -o rsize'
+alias ports='netstat -tulanp'
+
+# Network
+alias myip='curl ifconfig.me'
+alias ping='ping -c 5'
+alias p1='ping 1.1.1.1'
+alias p8='ping 8.8.8.8'
+
+# Service
+alias sysstat='systemctl status'
+alias sysen='systemctl enable'
+alias sysdis='systemctl diable'
+alias sysstart='systemctl start'
+
+# Create and cd into directory
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Extract any archive
+extract() {
+    if [ -f "$1" ] ; then
+        case "$1" in
+            *.tar.bz2)   tar xjf "$1"     ;;
+            *.tar.gz)    tar xzf "$1"     ;;
+            *.bz2)       bunzip2 "$1"     ;;
+            *.rar)       unrar x "$1"     ;;
+            *.gz)        gunzip "$1"      ;;
+            *.tar)       tar xf "$1"      ;;
+            *.tbz2)      tar xjf "$1"     ;;
+            *.tgz)       tar xzf "$1"     ;;
+            *.zip)       unzip "$1"       ;;
+            *.Z)         uncompress "$1"  ;;
+            *.7z)        7z x "$1"        ;;
+            *)           echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# Create a backup of a file
+backup() {
+    cp "$1" "$1.bak"
+}
+
+# Quick weather
+weather() {
+    curl "wttr.in/${1:-}"
+}
+
+# Calculator
+calc() {
+    echo "$*" | bc -l
+}
+
+# Find process by name
+psgrep() {
+    ps aux | grep -v grep | grep -i "$1"
+}
+
+# Docker
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias di='docker images'
