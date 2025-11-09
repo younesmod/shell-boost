@@ -26,17 +26,17 @@ This project provides a comprehensive set of shell aliases and functions that en
 
 Key Features:
 
-    Package Manager Agnostic: Works with apt, dnf, yum, pacman, zypper, apk
+   - Package Manager Agnostic: Works with apt, dnf, yum, pacman, zypper, apk
 
-    System Management: Unified update, upgrade, and cleanup commands
+   - System Management: Unified update, upgrade, and cleanup commands
 
-    Navigation Boosters: Quick directory navigation and file operations
+   - Navigation Boosters: Quick directory navigation and file operations
 
-    Safety Features: Interactive file operations to prevent accidents
+   - Safety Features: Interactive file operations to prevent accidents
 
-    Development Tools: Git shortcuts and development utilities
+   - Development Tools: Git shortcuts and development utilities
 
-    Network & Monitoring: Quick system monitoring and network tools
+   - Network & Monitoring: Quick system monitoring and network tools
 
 
 ### <b>🚀 Quick Start</b>
@@ -56,7 +56,9 @@ chmod +x install-zshedit.sh     # for zsh
 
 3. Run the installer
 ```bash
-./shell-boost.sh
+./install-bashedit.sh    # for bash
+# OR
+./install-zshedit.sh     # for zsh
 ```
 
 4. Reload your shell
