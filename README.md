@@ -14,11 +14,11 @@ A collection of essential aliases and functions to supercharge your shell experi
 </div>
 
 ## <b>Table Of Content</b>
-- Project Overview
-- Quick Start
-- Usage
-- Features
-- Project Structure
+- [Project Overview](#-project-overview)
+- [Quick Start](#-quick-start)
+- [Usage](#-usage)
+- [Features](#-features)
+- [Project Structure](#-project-structure)
 
 ### <b>🎯 Project Overview</b>
 
